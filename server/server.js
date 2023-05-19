@@ -1,47 +1,70 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+import {} from "dotenv/config";
+import express, { json } from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import fileUpload from "express-fileupload";
 
-require ("dotenv").config();
+const { connect } = mongoose;
+
+// Connect MongoDB.
+mongoose.set("strictQuery", false);
+const URI = process.env.MONGODB_URL;
+connect(
+  URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (!err) {
+      console.log("MongoDB Connection Succeeded.");
+    } else {
+      console.log("Error in DB connection: " + err);
+    }
+  }
+);
 
 const app = express();
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(json());
+app.use(
+  cors({
+    credentials: true,
+    origin: true,
+  })
+);
+app.use(express.urlencoded({ extended: true }));
+app.set("trust proxy", 1);
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
 
-app.use(cors())
+const port = process.env.PORT || 5000;
 
-const PORT = process.env.PORT || 5000;
-const URL = process.env.MONGODB_URL;
-
-//Rental management - Senal
-const Rental = require("./controller/RentalController");
-app.use("/api", Rental);
-
-//Reservation management - Ravindu
-const Reservation = require("./controller/reservationController");
-app.use("/api", Reservation);
-const signupCon = require('./controller/signupController');
-app.use("/api", signupCon);
-
-//Vehicle management - Kaveen
-const Vehicle = require("./controller/VehicleController");
-app.use("/api", Vehicle);
-
-//Employee management - Chamoth
-const Employee = require("./controller/EmployeeController");
-app.use("/api", Employee);
-
-//Login management - Chamoth
-const loginRouter = require("./controller/Login.js");
-app.use("/login", loginRouter);
-
-
-
-mongoose.connect(URL).then(()=> {
-    console.log('DB Connected Successfully');
-})
-.catch((err) => console.log('DB Connection Error',err));
-
-app.listen(PORT,()=>{
-    console.log(`App is running on ${PORT}`);
+app.listen(port, () => {
+  `Server running on port ${port} 🔥`;
+  console.log(`Server running on port ${port} 🔥`);
 });
+
+//route imports
+
+import imageUploadRoute from "./routes/imageUploadRoute.js";
+
+
+//Doctor route
+import userRoute from "./routes/user.js"; 
+//patient route   
+
+
+//routes 
+
+app.use("/api", imageUploadRoute);
+
+//Doctor routes
+app.use(userRoute);
+//patient routes
+
+
+
+  
