@@ -13,10 +13,27 @@ app.use(cors())
 const PORT = process.env.PORT || 5000;
 const URL = process.env.MONGODB_URL;
 
+//Rental management - Senal
+const Rental = require("./controller/RentalController");
+app.use("/api", Rental);
 
-//Salary management - Boya
-const Salary = require("./controller/SalaryController");
-app.use("/api", Salary);
+//Reservation management - Ravindu
+const Reservation = require("./controller/reservationController");
+app.use("/api", Reservation);
+const signupCon = require('./controller/signupController');
+app.use("/api", signupCon);
+
+//Vehicle management - Kaveen
+const Vehicle = require("./controller/VehicleController");
+app.use("/api", Vehicle);
+
+//Employee management - Chamoth
+const Employee = require("./controller/EmployeeController");
+app.use("/api", Employee);
+
+//Login management - Chamoth
+const loginRouter = require("./controller/Login.js");
+app.use("/login", loginRouter);
 
 
 
