@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -11,13 +11,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from "../Images/LOGO.png";
 import Buttons from '../Buttons/Buttons'; 
 import { Paper } from '@mui/material';
+import { useState } from "react";
+import { loginUser } from '../Service/UserAPI';
+import { useNavigate } from 'react-router-dom';
 
 
 const theme = createTheme();
 
 export default function SignIn() {
-
- 
   const Styles = {
     logo: {
       display: "block",
@@ -25,16 +26,25 @@ export default function SignIn() {
       width: "40px",
     },
   }
-
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+  const [userRole, setUserRole] = useState("");
+  //form submit 
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const email = data.get("email");
+    const password = data.get("password");
+    console.log({email: data.get('email'), password: data.get('password'),
     });
-  };
 
+    //api call
+    const response = await loginUser({ email, password })
+    console.log("login",response)
+
+  if (response.status===200){
+      setUserRole(response.data.role);
+      navigate("/") // Store user role in state
+  };
   return (
 <>
   <ThemeProvider theme={theme}>
@@ -86,8 +96,8 @@ export default function SignIn() {
               }}
             />
             
-            <Buttons sx={{ width : "100%", fontFamily: "Quicksand" , 
-             }} label = "Sign In" to = "/"/>   
+            <Button type="submit" sx={{ width : "100%", fontFamily: "Quicksand" , 
+             }}>Sign In</Button>   
 
             <Grid container>
            

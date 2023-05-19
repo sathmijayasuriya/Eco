@@ -42,6 +42,7 @@ const userController = {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
   },
+  
   createUser: async (req, res) => {
     try {
       const { firstName, lastName, userName, role, email, password } = req.body;

@@ -15,9 +15,6 @@ const Profilereg = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
-  const roles = ["user", "admin"];
-
   //reset button
   const handleReset = () => {
     setFirstname('');
@@ -103,32 +100,6 @@ const Profilereg = () => {
                 style: { fontFamily: "Quicksand" },
               }}
             />
-
-            <FormControl sx = {{width : "400px",}} margin="normal"   variant="standard" >
-              <InputLabel
-                fontFamily="Quicksand"
-                id="demo-simple-select-helper-label"
-                style={{ fontFamily: 'Quicksand' }}
-                sx = {{width : "400px",}}
-              >
-                Role{" "}
-              </InputLabel>
-              <Select
-                label={'margin="normal"'}
-                required
-                labelId="demo-simple-select-helper-label"
-                value={role}
-                id="demo-simple-select-helper"
-                onChange={(e) => setRole(e.target.value)}
-              >
-                {roles.map((group) => (
-                  <MenuItem sx={{ fontFamily: "Quicksand" }} key={group} value={group}>
-                    {group}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-
             {/* <TextField
               required
               label="Mobile Number"

@@ -28,7 +28,7 @@ const Header = () => {
     logo: {
       display: "block",
       margin: "auto",
-      width: "40px",
+      width: "100px",
       paddingTop : "2px"
     },
     button : {
