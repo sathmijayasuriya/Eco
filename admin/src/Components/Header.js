@@ -17,24 +17,28 @@ export default function Header() {
     text: {
       fontFamily: "Quicksand",
     },
+    divider: {
+      margin: "10px 0",
+    },
   };
+
   return (
     <>
       <Grid container sx={{ justifyContent: "space-between", display: "flex" }}>
         <Grid item xs={1}>
-          <Link to = "/">
-          <img style={Styles.img} src={Logo} alt="Logo" />
+          <Link to="/">
+            <img style={Styles.img} src={Logo} alt="Logo" />
           </Link>
         </Grid>
         <Grid item xs={1}>
           <Link to="/">
             <Typography style={Styles.text}>
-              <b>DASHBOARD |</b>
+              <b>DASHBOARD</b>
             </Typography>
           </Link>
         </Grid>
       </Grid>
-      <Divider orientation="vertical" />
+      <Divider sx={Styles.divider} />
     </>
   );
 }
