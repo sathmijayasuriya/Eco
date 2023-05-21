@@ -1,8 +1,13 @@
-import {} from "dotenv/config";
-import express, { json } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import fileUpload from "express-fileupload";
+// Route imports
+import imageUploadRoute from "./routes/imageUploadRoute.js";
+import adminRoute from "./routes/admin.js";
+import userRoute from "./routes/user.js";
+import adminController from "./controllers/admin.js";
+
 
 const { connect } = mongoose;
 
@@ -25,7 +30,7 @@ connect(
 );
 
 const app = express();
-app.use(json());
+app.use(express.json());
 app.use(
   cors({
     credentials: true,
@@ -39,32 +44,29 @@ app.use(
     useTempFiles: true,
   })
 );
-
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-  `Server running on port ${port} 🔥`;
   console.log(`Server running on port ${port} 🔥`);
 });
 
-//route imports
-
-import imageUploadRoute from "./routes/imageUploadRoute.js";
 
 
-//Doctor route
-import userRoute from "./routes/user.js"; 
-//patient route   
 
 
-//routes 
+//Middleware
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next(); // allow access to the next middleware/route handler
+  } else {
+    res.status(403).json({ message: "Unauthorized" });
+  }
+};
 
+// Routes
 app.use("/api", imageUploadRoute);
-
-//Doctor routes
 app.use(userRoute);
-//patient routes
+app.use("/admin", isAdmin, adminRoute); // Apply isAdmin middleware to admin routes
 
-
-
-  
+// Protected admin route
+app.get("/admin/dashboard", isAdmin, adminController.getDashboard);

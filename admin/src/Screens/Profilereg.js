@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Header from "../Components/Header";
-import { TextField, Button,FormControl,InputLabel,Select,MenuItem, Stack,} from "@mui/material";
+import { TextField, Button,FormControl,InputLabel,Select,MenuItem,} from "@mui/material";
 // import Buttons from '../Buttons/Buttons'; 
 import Reg1 from "../Images/reg1.jpg";
 import { createUser } from "../Service/UserAPI";
@@ -36,7 +36,7 @@ const Profilereg = () => {
       firstName,
       lastName,
       email,
-      role: "user",
+      role: "admin",
       userName,
       password,
     });
@@ -44,7 +44,7 @@ const Profilereg = () => {
       firstName,
       lastName,
       email,
-      role: "user",
+      role: "admin",
       userName,
       password,
     });
@@ -180,7 +180,7 @@ const Profilereg = () => {
                   style: { fontFamily: "Quicksand" },
                 }}
               />
-              <Stack>
+
               <Button
                 variant="outlined"
                 onClick={handleReset}
@@ -195,7 +195,6 @@ const Profilereg = () => {
               >
                 Submit
               </Button>
-              </Stack>
             </form>
           </Box>
         </Grid>

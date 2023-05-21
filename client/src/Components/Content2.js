@@ -3,7 +3,7 @@ import Solar1 from "../Images/solar1.jpg"
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from '@mui/material/Typography';
-// import  Button from "@mui/material/Button";
+import  Button from "@mui/material/Button";
 import Buttons from '../Buttons/Buttons'; 
 
 const Content2 = () => {
@@ -29,10 +29,10 @@ const Content2 = () => {
             providing you with 24/7 energy security. It stores the energy you produce
              with Solar Roof so you can power your home anytime—at night or during an outage.
             </Typography>
-            <Buttons sx={{ width : "70%",marginLeft: "65px",  marginTop:"100px",fontFamily: "Quicksand" , 
-             }} label="ORDER NOW" to="/"/>          
-            <Buttons sx={{ width : "70%",marginLeft: "65px",  marginTop:"10px",fontFamily: "Quicksand" , 
-             }} label = " LEARN MORE" to = "/"/>       
+            <Button  variant="contained" sx={{ width : "70%",marginLeft: "65px",  marginTop:"100px",fontFamily: "Quicksand" , 
+             }} > ORDER NOW </Button>         
+            <Button variant="contained" sx={{ width : "70%",marginLeft: "65px",  marginTop:"10px",fontFamily: "Quicksand" , 
+             }} > LEARN MORE </Button>      
         </Box>
        
         </Grid>

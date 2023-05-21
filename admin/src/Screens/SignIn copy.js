@@ -9,9 +9,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from "../Images/LOGO.png";
+import Buttons from '../Buttons/Buttons'; 
 import { Paper } from '@mui/material';
-// import { useState } from "react";
-// import { loginUser } from '../Service/UserAPI';
+import { useState } from "react";
+import { loginUser } from '../Service/UserAPI';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from "react-redux";
@@ -25,7 +26,7 @@ export default function SignIn() {
     logo: {
       display: "block",
       margin: "auto",
-      width: "100px",
+      width: "40px",
     },
   }
   const navigate = useNavigate()

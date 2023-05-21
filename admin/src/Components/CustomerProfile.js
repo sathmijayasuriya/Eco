@@ -7,9 +7,11 @@ import { Avatar, CardActionArea } from "@mui/material";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import User from "../Images/user.jpg";
-import Buttons from "../Buttons/Buttons";
+import Grid from "@mui/material/Grid";
+import UserDeleteConfirmation from "./UserDeleteConfirmation";
+import FaceIcon from '@mui/icons-material/Face';
 
-export default function CustomerProfile() {
+export default function CustomerProfile({ customer, setRefetch, refetch }) {
   const Styles = {
     cardContent: {
       display: "flex",
@@ -28,7 +30,7 @@ export default function CustomerProfile() {
   };
 
   return (
-    <>
+    <Grid item xs={4}>
       <Card sx={{ maxWidth: 300 }}>
         <CardActionArea>
           <CardContent sx={Styles.cardContent}>
@@ -41,43 +43,35 @@ export default function CustomerProfile() {
           </CardContent>
           <CardContent>
             <Typography style={Styles.text} gutterBottom component="div">
-              First Name :
+              First Name : {customer.firstName}
             </Typography>
             <Typography style={Styles.text} gutterBottom component="div">
-              Last Name :
+              Last Name : {customer.lastName}
             </Typography>
             <Typography style={Styles.text} gutterBottom component="div">
-              User Name :
+              User Name : {customer.userName}
             </Typography>
             <Typography style={Styles.text} gutterBottom component="div">
-              Email :
+              Email : {customer.email}
             </Typography>
             <Typography style={Styles.text} gutterBottom component="div">
-              Password :
-            </Typography>
-            <Typography style={Styles.text} gutterBottom component="div">
-              Date :
+              Date : {customer.createdAt}
             </Typography>
             <CardContent
               sx={{
                 display: "flex",
-                justifyContent: "space-between",
+                justifyContent: "center",
               }}
             >
-              <Buttons
-                sx={{ width: "60%", fontFamily: "Quicksand" }}
-                label="Edit"
-                to="/"
-              />
-              <Buttons
-                sx={{ width: "60%", fontFamily: "Quicksand" }}
-                label="Delete"
-                to="/"
+              <UserDeleteConfirmation
+                userId={customer._id}
+                setRefetch={setRefetch}
+                refetch={refetch}
               />
             </CardContent>
           </CardContent>
         </CardActionArea>
       </Card>
-    </>
+    </Grid>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-//import  Button from "@mui/material/Button";
+import  Button from "@mui/material/Button";
 import Buttons from '../Buttons/Buttons'; 
 
 
@@ -31,8 +31,8 @@ const Content = () => {
             >
               <b>Complement Your Home’s Aesthetic</b>
             </Typography>
-            <Buttons sx={{ width : "30%",marginLeft: "30px",  marginTop:"10px",fontFamily: "Quicksand" , 
-             }} label = "ORDER NOW" to = "/"/>   
+            <Button  variant="contained"sx={{ width : "30%",marginLeft: "30px",  marginTop:"10px",fontFamily: "Quicksand" , 
+             }} >ORDER NOW</Button>   
           </Paper>
         </Grid>
         <Grid item xs={12} md={6}>
