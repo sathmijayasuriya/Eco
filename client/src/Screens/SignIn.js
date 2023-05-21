@@ -9,11 +9,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from "../Images/LOGO.png";
-import Buttons from '../Buttons/Buttons'; 
 import { Paper } from '@mui/material';
-import { useState } from "react";
-import { loginUser } from '../Service/UserAPI';
+// import { useState } from "react";
+// import { loginUser } from '../Service/UserAPI';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from "react-redux";
+import { login } from '../features/auth/authSlice';
 
 
 const theme = createTheme();
@@ -23,28 +25,49 @@ export default function SignIn() {
     logo: {
       display: "block",
       margin: "auto",
-      width: "40px",
+      width: "100px",
     },
   }
   const navigate = useNavigate()
-  const [userRole, setUserRole] = useState("");
+  const dispatch = useDispatch();
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  React.useEffect(() => {
+    if (user?._id) {
+      toast.success("Login successful");
+      navigate("/");
+    }else{
+      navigate("/signin");
+    }
+    if (message) {
+      toast.error(message);
+    }
+  }, [user, isError, isSuccess, message, navigate]);
+  
   //form submit 
   const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const password = data.get("password");
-    console.log({email: data.get('email'), password: data.get('password'),
-    });
+    console.log({ email: data.get("email"), password: data.get("password") });
 
-    //api call
-    const response = await loginUser({ email, password })
-    console.log("login",response)
+    dispatch(login({ email, password }));
+    // //api call
+    // const response = await loginUser({ email, password });
+    // console.log("login", response);
 
-  if (response.status===200){
-      setUserRole(response.data.role);
-      navigate("/") // Store user role in state
-  };
+    // if (response.status === 200) {
+    //   toast.success("Login successful");
+    //   setUserRole(response.data.role);
+    //   navigate("/"); // Store user role in state
+    // } else if (response.request?.status === 400) {
+    //   toast.error("Invalid username or password");
+    // } else {
+    //   toast.error("Oops! something went wrong");
+    // }
+  }
   return (
 <>
   <ThemeProvider theme={theme}>

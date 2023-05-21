@@ -3,15 +3,18 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Header from "../Components/Header";
-import { TextField, Button,FormControl,InputLabel,Select,MenuItem,} from "@mui/material";
+import { TextField, Button,FormControl,InputLabel,Select,MenuItem, Stack,} from "@mui/material";
 // import Buttons from '../Buttons/Buttons'; 
 import Reg1 from "../Images/reg1.jpg";
+import { createUser } from "../Service/UserAPI";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Profilereg = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [userName, setUsername] = useState("");
-  const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,9 +30,32 @@ const Profilereg = () => {
 
   
   //submit button
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Submitted:', { firstName, lastName, email, role });
+    console.log("Submitted:", {
+      firstName,
+      lastName,
+      email,
+      role: "user",
+      userName,
+      password,
+    });
+    const response = await createUser({
+      firstName,
+      lastName,
+      email,
+      role: "user",
+      userName,
+      password,
+    });
+    if (response.status === 200) {
+      toast.success("Registration successful");
+      navigate("/signin"); // Store user role in state
+    } else if (response.request.status === 400) {
+      toast.error(response.data?.message);
+    } else {
+      toast.error("Oops! something went wrong");
+    }
   };
 
   const Styles = {
@@ -55,52 +81,62 @@ const Profilereg = () => {
       <Header />
 
       <Grid container spacing={2} direction={"row"}>
-        <Grid item xs={3} md={6} >
-          <Typography sx={Styles.registertext} variant="h5" >GET REGISTERED HERE...   </Typography>
-          <Box sx={ Styles.box1}>
-          <form onSubmit={handleSubmit} >
-            <TextField style = {Styles.textbox}
-              required
-              label="First Name"
-              value={firstName}
-              onChange={(e) => setFirstname(e.target.value)}
-              variant="standard" 
-              sx = {{width : "400px",mt:"10px"}}
-              InputLabelProps={{
-                style: { fontFamily: "Quicksand" },
-              }}
-              error={!firstName.match(/^[a-zA-Z\s]*$/)} // show error if contains non-alphabetic characters
-              helperText={!firstName.match(/^[a-zA-Z\s]*$/) ? 'First name must contain only alphabetic characters' : ''} // display error message
-            />
-          
-            <TextField
-              required
-              label="Last Name"
-              variant="standard" 
-              value={lastName}
-              onChange={(e) => setLastname(e.target.value)}
-              margin="normal"
-              sx = {{width : "400px",}}
-              InputLabelProps={{
-                style: { fontFamily: "Quicksand" },
-              }}
-              error={!lastName.match(/^[a-zA-Z\s]*$/)} // show error if contains non-alphabetic characters
-              helperText={!lastName.match(/^[a-zA-Z\s]*$/) ? 'Last name must contain only alphabetic characters' : ''} // display error message
-              
-            />
-            <TextField
-              required
-              label="User Name"
-              variant="standard" 
-              value={userName}
-              onChange={(e) => setUsername(e.target.value)}
-              margin="normal"
-               sx = {{width : "400px",}}
-              InputLabelProps={{
-                style: { fontFamily: "Quicksand" },
-              }}
-            />
-            {/* <TextField
+        <Grid item xs={3} md={6}>
+          <Typography sx={Styles.registertext} variant="h5">
+            GET REGISTERED HERE...{" "}
+          </Typography>
+          <Box sx={Styles.box1}>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                style={Styles.textbox}
+                required
+                label="First Name"
+                value={firstName}
+                onChange={(e) => setFirstname(e.target.value)}
+                variant="standard"
+                sx={{ width: "400px", mt: "10px" }}
+                InputLabelProps={{
+                  style: { fontFamily: "Quicksand" },
+                }}
+                error={!firstName.match(/^[a-zA-Z\s]*$/)} // show error if contains non-alphabetic characters
+                helperText={
+                  !firstName.match(/^[a-zA-Z\s]*$/)
+                    ? "First name must contain only alphabetic characters"
+                    : ""
+                } // display error message
+              />
+
+              <TextField
+                required
+                label="Last Name"
+                variant="standard"
+                value={lastName}
+                onChange={(e) => setLastname(e.target.value)}
+                margin="normal"
+                sx={{ width: "400px" }}
+                InputLabelProps={{
+                  style: { fontFamily: "Quicksand" },
+                }}
+                error={!lastName.match(/^[a-zA-Z\s]*$/)} // show error if contains non-alphabetic characters
+                helperText={
+                  !lastName.match(/^[a-zA-Z\s]*$/)
+                    ? "Last name must contain only alphabetic characters"
+                    : ""
+                } // display error message
+              />
+              <TextField
+                required
+                label="User Name"
+                variant="standard"
+                value={userName}
+                onChange={(e) => setUsername(e.target.value)}
+                margin="normal"
+                sx={{ width: "400px" }}
+                InputLabelProps={{
+                  style: { fontFamily: "Quicksand" },
+                }}
+              />
+              {/* <TextField
               required
               label="Mobile Number"
               value={mobileNumber}
@@ -118,55 +154,55 @@ const Profilereg = () => {
               } // display error message only if mobileNumber is not empty and doesn't match the pattern
             /> */}
 
-            <TextField
-              required
-              variant="standard" 
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              margin="normal"
-              sx = {{width : "400px",}}
-              InputLabelProps={{
-                style: { fontFamily: "Quicksand" },
-              }}
-            />
-            <TextField
-              required
-              id="outlined-password-input"
-              variant="standard" 
-              label="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              margin="normal"
-              sx = {{width : "400px",}}
-              InputLabelProps={{
-                style: { fontFamily: "Quicksand" },
-              }}
-            />
-           
-          </form>
-          <Button
-              variant="outlined"
-              onClick={handleReset}
-              sx={{mt:"20px",fontFamily: "Quicksand" }}
-            >
-              Reset
-            </Button>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={ {ml:"20px",mt:"20px",fontFamily: "Quicksand" }}
-            >
-              Submit
-            </Button>
-            </Box>
+              <TextField
+                required
+                variant="standard"
+                label="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                margin="normal"
+                sx={{ width: "400px" }}
+                InputLabelProps={{
+                  style: { fontFamily: "Quicksand" },
+                }}
+              />
+              <TextField
+                required
+                id="outlined-password-input"
+                variant="standard"
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                margin="normal"
+                sx={{ width: "400px" }}
+                InputLabelProps={{
+                  style: { fontFamily: "Quicksand" },
+                }}
+              />
+              <Stack>
+              <Button
+                variant="outlined"
+                onClick={handleReset}
+                sx={{ mt: "20px", fontFamily: "Quicksand" }}
+              >
+                Reset
+              </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ ml: "20px", mt: "20px", fontFamily: "Quicksand" }}
+              >
+                Submit
+              </Button>
+              </Stack>
+            </form>
+          </Box>
         </Grid>
 
-        <Grid item xs={3} md={6} sx={{justifyContent:"left"}} >
+        <Grid item xs={3} md={6} sx={{ justifyContent: "left" }}>
           <img style={Styles.solarimage} src={Reg1} alt="imagee" />
         </Grid>
-        
       </Grid>
     </>
   );

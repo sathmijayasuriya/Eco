@@ -5,6 +5,7 @@ import Images from '../Components/Images'
 import Content from '../Components/Content'
 import Content2 from '../Components/Content2'
 import Solarhome from '../Components/solarhome'
+import Calculate from '../Components/Calculate'
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
    <Solarhome/>
     <Content/>
     <Content2/>
+    <Calculate/>
     <Footer/>
    
     
