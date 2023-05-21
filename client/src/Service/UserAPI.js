@@ -6,11 +6,11 @@ export const createUser = async (UserData) => {
     const response = await axios.post(
       `${baseUrl}user/register`,UserData
     );
-    console.log("user registerd:", response.data);
-    return response.data;
+    console.log("user registered:", response.data);
+    return response;
   } catch (error) {
-    console.error("Error registering:", error);
-    throw error;
+    console.error("Error registering:", error.response);
+    return error.response;
   }
 };
 export const loginUser = async (UserData) => {
@@ -20,7 +20,7 @@ export const loginUser = async (UserData) => {
       return response;
     } catch (error) {
       console.error('Error logging in:', error);
-      throw error;
+      return error.response;
     }
   };
 export const getUser = async (userId) => {
@@ -30,7 +30,7 @@ export const getUser = async (userId) => {
       return response.data;
     } catch (error) {
       console.error("Error getting user:", error);
-      throw error;
+      return error.response;
     }
   };
   
@@ -41,18 +41,18 @@ export const getUser = async (userId) => {
       return response.data;
     } catch (error) {
       console.error("Error updating user:", error);
-      throw error;
+      return error.response;
     }
   };
   
   export const deleteUser = async (userId) => {
     try {
-      const response = await axios.delete(`${baseUrl}user/delete${userId}`);
+      const response = await axios.delete(`${baseUrl}user/delete/${userId}`);
       console.log("User deleted:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error deleting user:", error);
-      throw error;
+      return error.response;
     }
   };
   

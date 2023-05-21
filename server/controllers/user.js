@@ -32,7 +32,8 @@ const userController = {
     if (user && (await bcrypt.compare(password, user.password))) {
       res.json({
         _id: user.id,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         userName: user.userName,
         role: user.role,
@@ -54,7 +55,7 @@ const userController = {
         });
 
       if (!firstName || !lastName || !role || !userName || !password || !email)
-        return res.status(400).json({ msg: "Please fill in all fields." });
+        return res.status(400).json({ message: "Please fill in all fields." });
 
       // Hash password
       const salt = await bcrypt.genSalt(10);
@@ -73,12 +74,14 @@ const userController = {
         res.status(200).json({
           _id: account.id,
           userName: account.userName,
+          firstName: account.firstName,
+          lastName: account.lastName,
           role: account.role,
           email: account.email,
           token: generateToken(account._id),
         });
       } else {
-        return res.status(400).json({ msg: "Invalid user data" });
+        return res.status(400).json({ message: "Invalid user data" });
       }
     } catch (err) {
       return res.status(500).json({ message: err.message });
@@ -88,15 +91,22 @@ const userController = {
   updateUser: async (req, res) => {
     try {
       const id = req.params.id;
-      const { firstName, lastName, userName, role, email, password } = req.body;
+      const { firstName, lastName, userName, email,  } = req.body;
 
-      await User.findOneAndUpdate(
+      const user = await User.findOneAndUpdate(
         { _id: id },
-        { firstName, lastName, userName, role, email, password }
+        { firstName, lastName, userName, email,  }
       );
-      res.json({
+      res.status(200).json({
         message: "User update success",
-        data: { firstName, lastName, userName, role, email, password },
+        data: {
+          _id: user._id,
+          role: user.role,
+          firstName,
+          lastName,
+          userName,
+          email,
+        },
       });
     } catch (err) {
       return res.status(500).json({ message: err.message });
