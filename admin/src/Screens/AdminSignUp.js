@@ -4,14 +4,7 @@ import Typography from "@mui/material/Typography";
 import Header from "../Components/Header";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
-import {
-  TextField,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { TextField, Button } from "@mui/material";
 // import Buttons from '../Buttons/Buttons';
 
 const AdminSignUp = () => {
@@ -173,11 +166,11 @@ const AdminSignUp = () => {
             Submit
           </Button>
         </Box>
-        <Box sx={{mt:"20px"}}>
+        <Box sx={{ mt: "20px" }}>
           <Typography sx={{ mt: "20px", fontFamily: "Quicksand" }} variant="h8">
             <b>Already have an account ? </b>{" "}
           </Typography>
-          <Link to="/AdminSignIn">
+          <Link to="/signin">
             <b>Sign In</b>
           </Link>
         </Box>

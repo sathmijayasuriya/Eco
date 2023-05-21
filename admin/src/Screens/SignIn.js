@@ -1,5 +1,5 @@
 import * as React from "react";
-// import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -9,8 +9,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Logo from "../Images/logo.png";
-import Buttons from "../Buttons/Buttons";
 import { Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../features/auth/authSlice";
 
 const theme = createTheme();
 
@@ -19,19 +22,49 @@ export default function SignIn() {
     logo: {
       display: "block",
       margin: "auto",
-      width: "100px",
+      width: "40px",
     },
   };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  React.useEffect(() => {
+    if (user?._id) {
+      toast.success("Login successful");
+      navigate("/");
+    } else {
+      navigate("/signin");
+    }
+    if (message) {
+      toast.error(message);
+    }
+  }, [user, isError, isSuccess, message, navigate]);
 
-  const handleSubmit = (event) => {
+  //form submit
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+    const email = data.get("email");
+    const password = data.get("password");
+    console.log({ email: data.get("email"), password: data.get("password") });
 
+    dispatch(login({ email, password }));
+    // //api call
+    // const response = await loginUser({ email, password });
+    // console.log("login", response);
+
+    // if (response.status === 200) {
+    //   toast.success("Login successful");
+    //   setUserRole(response.data.role);
+    //   navigate("/"); // Store user role in state
+    // } else if (response.request?.status === 400) {
+    //   toast.error("Invalid username or password");
+    // } else {
+    //   toast.error("Oops! something went wrong");
+    // }
+  };
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -63,7 +96,7 @@ export default function SignIn() {
                 variant="h9"
                 sx={{ fontFamily: "Quicksand", textAlign: "center" }}
               >
-                Admin Sign In
+                Please enter your login credentials to access your Eco platform.
               </Typography>
               <Box
                 component="form"
@@ -99,11 +132,12 @@ export default function SignIn() {
                   }}
                 />
 
-                <Buttons
+                <Button
+                  type="submit"
                   sx={{ width: "100%", fontFamily: "Quicksand" }}
-                  label="Sign In"
-                  to="/"
-                />
+                >
+                  Sign In
+                </Button>
 
                 <Grid container>
                   <Link
@@ -113,7 +147,7 @@ export default function SignIn() {
                       marginTop: "10px",
                       fontFamily: "Quicksand",
                     }}
-                    href="/AdminSignUp"
+                    href="/Profilereg"
                     variant="body2"
                   >
                     {"Don't have an account? Sign Up"}
