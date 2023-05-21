@@ -1,10 +1,11 @@
 import React from "react";
 import Logo from "../Images/LOGO.png";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { Box } from "@mui/material";
 import Dropdown from "./dropdown";
 import { Link } from "react-router-dom";
 import Divider from '@mui/material/Divider';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Header = () => {
    
@@ -22,52 +23,65 @@ const Header = () => {
       left: 0,
       right: 0,
       zIndex: 1,
-      backgroundColor : "white",
-
+      backgroundColor: "white",
     },
     logo: {
       display: "block",
       margin: "auto",
       width: "100px",
-      paddingTop : "2px"
+      paddingTop: "2px",
     },
-    button : {
+    button: {
       width: "auto",
-      mr:3,
+      mr: 3,
       color: "black",
       fontFamily: "Quicksand",
       borderBottom: `2px solid ${borderColor}`,
       "&:hover": {
         borderColor: active ? "black" : "transparent",
       },
-//"#009933" 
+      //"#009933"
     },
-    boxattributes : {
+    icon: {
+      color: "black",
+      "&:hover": {
+        borderColor: active ? "black" : "transparent",
+      },
+    },
+    boxattributes: {
       width: "100%",
       display: "flex",
       margin: "auto",
       justifyContent: "center",
       padding: "1px",
     },
- 
   };
 
   return (
-  <>
-    <header style={Styles.headerContainer}>
-      <img style={Styles.logo} src={Logo} alt="Logo" />
-      <Box style={Styles.boxattributes} >
-        <Button sx={Styles.button}>HOME</Button>
-        <Button sx={Styles.button}>MODELS</Button>
-        <Button sx={Styles.button}>ENERGY</Button>
-         <Dropdown sx={Styles.button}/>
-        <Button sx={Styles.button}>SUPPORT</Button>
-        <Button sx={Styles.button}>ABOUT</Button>
-        <Button component = {Link} to='/signin' sx={Styles.button}>ACCOUNT</Button>
-      </Box>
-      <Divider  variant="middle" />
-    </header>
-  </>
+    <>
+      <header style={Styles.headerContainer}>
+        <img style={Styles.logo} src={Logo} alt="Logo" />
+        <Box style={Styles.boxattributes}>
+          <Button component={Link} to="/" sx={Styles.button}>HOME</Button>
+          <Button sx={Styles.button}>MODELS</Button>
+          <Button sx={Styles.button}>ENERGY</Button>
+          <Dropdown sx={Styles.button} />
+          <Button sx={Styles.button}>SUPPORT</Button>
+          <Button sx={Styles.button}>ABOUT</Button>
+          <Button component={Link} to="/signin" sx={Styles.button}>
+            ACCOUNT
+          </Button>
+          <IconButton
+            component={Link}
+            to="/profilesettings"
+             sx={Styles.icon}
+          >
+            <AccountCircleOutlinedIcon />
+          </IconButton>
+        </Box>
+        <Divider variant="middle" />
+      </header>
+    </>
   );
 };
 
