@@ -1,0 +1,286 @@
+/*Header*/
+.header-basic {
+    position: relative;
+    background-color: #fdfdfd;
+    width: 100%;
+    bottom: 10px;
+    height: 12rem;
+}
+
+.header-basic .header-col{
+margin-top: 5px;
+margin-bottom: 10px;
+}
+
+#logout {
+    text-align: right;
+    font-size: 25px;
+    color: #aaa;
+}
+
+/*Sign up page*/
+.sign-up{
+    text-align: left;
+    font-size: 18px;
+    color:red;
+
+}
+.sign-up-label{
+    text-align: left;
+}
+
+.bg-image-sign-up {
+    /* background-image: url("https://i.ibb.co/c6kFNFX/19199058.png"); */
+    background-image: url("https://i.ibb.co/WWxwCqW/Microsoft-Teams-image.webp");
+    background-size: cover;
+    background-position: center center;
+
+}
+
+.signup {
+min-height: 100vh;
+background-color: #ffffff;
+
+}
+
+.signup-container {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    /* border-style: solid;
+    border-width: medium; */
+    max-width: 500px;
+    min-height: 600px;
+    justify-content: center;
+    padding: 3rem 1rem 1rem 1rem;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+  }
+
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #5c5c55;
+    overflow: hidden;
+    width: auto;
+    padding: 0 -2 0 -2;
+}
+
+  /* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+  /* Change the color of links on hover */
+.topnav a:hover {
+    position: relative;
+    background-color: #CD9007;
+    color: black;
+}
+
+/*footer*/
+.footer-basic {
+    position: relative;
+    padding: 20px 0;
+    background-color: #fff1f1;
+    width: 100%;
+    bottom: 0;
+    top: 2rem;
+    height: 8rem;
+}
+
+.footer-basic .copyright {
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 0;
+}
+
+.footer-basic .row .col .desc {
+    margin-top: 15px;
+    margin-right: 6rem;
+    right: 0;
+    font-size: 13px;
+    text-align: right;
+    color: #aaa;
+    margin-bottom: 0;
+}
+
+.footer-basic .row .col .footerLogo {
+    margin-left: 4rem;
+    right: 0;
+    font-size: 18px;
+    color: #c83535;
+}
+
+.page-component-body{ 
+    min-height: 700px;
+    font-family: "Titillium Web", sans-serif;
+    font-weight: 500;
+} 
+
+.input-main-form-emp { 
+    width: 700px;
+    margin-top: 70px;
+    margin-left: 100px; 
+    position: relative;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19); 
+}
+
+.emp-bg-image {
+    /* background-image: url("https://i.ibb.co/c6kFNFX/19199058.png"); */
+    background-image: url("https://i.ibb.co/v3hXm4m/19199058.jpg");
+    background-size: 80% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+.tab-content-emp {
+    background-color: rgba(255, 255, 255, 0.845);
+} 
+
+.form-group-input{
+    padding: 10px;
+    width: 300px;
+}
+
+.form-group-input-long{
+    padding: 10px;
+    width: 600px;
+}
+
+.header-rental{
+    padding: 10px;
+}
+
+#sub-heading{
+    font-weight: 700;
+    font-style: italic;
+}
+
+#error-message{
+    font-size: 12px;
+    color: red;
+}
+
+/* validation styles */
+.success {
+    color: #1fc191;
+}
+
+.error {
+    color: red;
+}
+
+/*css for buttons*/
+
+.btn-ok {
+
+    background-color: #1fc191;
+    color: white;
+    width: 160px;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+.btn-reset {
+
+    background-color: #ffd200;
+    color: whte;
+    width: 160px;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+
+/*Dashboard style*/
+.dbutton {
+    background-color: #474747;
+    margin-top: 80px;
+    padding-top: 20px;
+    margin-right: 25px;
+    width: 100%;
+    height: 200px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    transition-duration: 0.4s;
+    font-size: 100px;
+    font-weight:800;
+    vertical-align: middle;
+}
+
+.dbutton:hover {
+    background-color: #CD9007;
+    color: white;
+}
+
+/*login page*/
+.login,
+.image {
+  min-height: 100vh;
+  background-color: #F3F3F3;
+}
+
+.loginbg {
+    bottom: 0px;
+}
+
+.bg-image {
+  /* background-image: url("https://i.ibb.co/c6kFNFX/19199058.png"); */
+  background-image: url("https://i.ibb.co/D8DqD91/Car-Rental-Process-Illustration.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.login-container {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  max-width: 500px;
+  min-height: 600px;
+  justify-content: center;
+  padding: 3rem 1rem 1rem 1rem;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+.btn-login {
+  background-color: #1fc191;
+  color: black;
+  width: 150px;
+  height: 50px;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+
+.login-form-input {
+  width: 400px;
+  height: 3rem;
+  margin: 3rem 0 0rem 0;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2),
+    0px 0px 10px 0px rgba(0, 0, 0, 0.19);
+}
+/*end of login styles*/
+
+.form-control{
+    color:black;
+}
