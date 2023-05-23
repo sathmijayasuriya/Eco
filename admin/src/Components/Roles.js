@@ -40,7 +40,7 @@ export default function Roles() {
           </Link>
         </Grid>
         <Grid>
-        <Link to="/AddSalary">
+        <Link to="/ViewSalary">
           <StyledImg
             src={Finance}
             alt="financial management"
